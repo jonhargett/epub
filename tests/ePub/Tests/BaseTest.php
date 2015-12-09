@@ -44,7 +44,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
      *
      * @param string $name Partial path to fixture
      *
-     * @return Package
+     * @return \ePub\Definition\Package
      */
     public function getFixtureEpub($name)
     {

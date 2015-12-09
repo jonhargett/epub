@@ -62,4 +62,17 @@ class ReaderTest extends BaseTest
 
         $this->assertTrue($epub instanceof \ePub\Definition\Package);
     }
+
+    public function testGettingImage()
+    {
+        $epub = $this->getFixtureEpub('Chinesemag.epub');
+
+        $this->assertTrue($epub instanceof \ePub\Definition\Package);
+
+        $image = $epub->getCoverImage();
+
+        $expected = base64_encode(file_get_contents($this->getFixturePath('2015770_CHS_cvr.jpg')));
+        $this->assertEquals($expected, $image, "encoded image didn't match.");
+    }
+
 }

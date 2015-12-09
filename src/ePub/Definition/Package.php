@@ -29,6 +29,8 @@ class Package
     
     public $navigation;
 
+    public $coverImage;
+
     public function __construct()
     {
         $this->manifest   = new Manifest();
@@ -61,5 +63,9 @@ class Package
     public function getNavigation()
     {
         return $this->navigation;
+    }
+
+    public function getCoverImage(){
+        return $this->coverImage;
     }
 }

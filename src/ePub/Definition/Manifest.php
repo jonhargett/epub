@@ -35,7 +35,7 @@ class Manifest extends Collection
             ));
         }
 
-        $id = $item->getIdentifier();
+        parent::add($item);
 
         $href = $item->href;
 
@@ -46,6 +46,6 @@ class Manifest extends Collection
         }
 
         $this->resources[$href] = $item;
-        $this->items[$id]       = $item;
     }
+
 }

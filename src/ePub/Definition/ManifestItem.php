@@ -25,6 +25,8 @@ class ManifestItem implements ItemInterface
 
     private $content;
 
+    public $properties;
+
     public function getIdentifier()
     {
         return $this->id;
@@ -44,5 +46,10 @@ class ManifestItem implements ItemInterface
         }
 
         return $this->content;
+    }
+
+    public function doesPropertyContain($property){
+        $properties = explode(' ', $this->properties);
+        return in_array($property, $properties);
     }
 }

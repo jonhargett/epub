@@ -81,12 +81,31 @@ class OpfResource
         $this->processManifestElement($xml->manifest, $package->manifest);
         $this->processSpineElement($xml->spine, $package->spine, $package->manifest, $package->navigation);
 
+        $package->coverImage = $this->processCoverImage($package->manifest);
+
         if ($xml->guide) {
             $this->processGuideElement($xml->guide, $package->guide);
         }
 
         return $package;
     }
+
+    private function processCoverImage(Manifest $manifest){
+        $url = '';
+
+        /* @var $item ManifestItem */
+        foreach ($manifest as $id=>$item){
+            if ($item->doesPropertyContain('cover-image')){
+                $url = $item->href;
+            }
+        }
+        if ($url){
+            $file = $this->resource->get($url);
+            return base64_encode($file);
+        }
+        return null;
+    }
+
 
     private function processMetadataElement(SimpleXMLElement $xml, Metadata $metadata)
     {
@@ -110,6 +129,7 @@ class OpfResource
             $item->href     = (string) $child['href'];
             $item->type     = (string) $child['media-type'];
             $item->fallback = (string) $child['fallback'];
+            $item->properties = (string) $child['properties'];
 
             $this->addContentGetter($item);
 
